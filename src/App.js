@@ -1,6 +1,7 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import Navbar from './utilities/Navbar'
+import Profile from './utilities/Profile';
 import Map from './utilities/Map'
 import {
   Row,
@@ -11,9 +12,13 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <div className="container" >
+
+      {/* <div className="container" >
         <Map />
-      </div>
+      </div> */}
+      
+        <Profile />
+      
     </div>
   );
 }
