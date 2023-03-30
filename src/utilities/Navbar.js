@@ -5,7 +5,9 @@ import React from "react";
 function MainNavbar() {
   return (
     <Navbar
-      style={{ backgroundColor: "#071740", position: "sticky" }}
+    // position="fixed"
+    // fixed="top"
+      style={{ backgroundColor: "#0A1828", position: "sticky" }}
       // bg="dark"
       variant="dark"
     >

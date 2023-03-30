@@ -4,7 +4,9 @@ import ProfileCard from "./ProfileCards";
 function Profile() {
   return (
     <>
-      <Container fluid style={{ backgroundColor: "#071740" }}>
+    {/* #071740 */}
+    {/* backgroundColor: "#0A1828", */}
+      <Container fluid  style={{  minHeight:"5vh" }}>
         <Container className="p-2 ">
           <Row className="mt-2">
             <Col className="p-1 ">
@@ -34,10 +36,10 @@ function Profile() {
           </Row>
         </Container>
       </Container>
-      <Container fluid className="mt-4">
+      <Container fluid className="mt-4" style={{minHeight:"90vh" }} >
         <Container>
           <Row>
-            <Col>
+            <Col >
               <ProfileCard />
             </Col>
             <Col>
