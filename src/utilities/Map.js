@@ -3,6 +3,7 @@ import { maxWidth } from "@mui/system";
 import React, { useState } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import ReactDatamaps from "react-india-states-map";
+import axios from "axios";
 
 const STATES = {
   Maharashtra: {
@@ -18,6 +19,20 @@ const Map = () => {
     data: STATES.Maharashtra,
     name: "India",
   });
+  const [candidatelist, setCandidateList] = useState(null);
+
+  // Axios.get("http://192.168.192.202:8000/get_candidates")
+  // .then((response) => {
+  //   console.log("hello");
+  // });
+  axios({
+    method: 'get',
+    url: 'http://192.168.192.202:8000/get_candidates'
+  }).then((response) => {
+    console.log(response.data);
+  }).catch((err) => {
+    console.log(err)
+  })
 
   const [stateLists, setStateLists] = useState(STATES);
 

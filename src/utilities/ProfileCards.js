@@ -7,7 +7,7 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { height } from "@mui/system";
-function ProfileCard() {
+function ProfileCard(props) {
   return (
     <>
       <style type="text/css">
@@ -27,16 +27,16 @@ function ProfileCard() {
     }
     `}
       </style>
-
-      <Card style={{ width: "18rem", marginTop: 10, padding:8, backgroundColor:"inherit", border:"1px solid #178582",borderColor:"#178582" }}>
+{/* {console.log(props.profile.name) } */}
+      <Card style={{ width: "18rem",color:"#178582", minHeight:"22rem", marginTop: 15, padding:8, backgroundColor:"inherit", border:"1px solid #178582",borderColor:"#178582" }}>
         <Card.Img
           variant="top"
           src="ProfilePicture.png"
           style={{ maxWidth: "10rem", height: "100%", alignSelf: "center" }}
         />
         <Card.Body>
-          <Card.Title>Name</Card.Title>
-          <Card.Text>Party</Card.Text>
+          <Card.Title style={{ color:"white"}}>{props.profile.name}</Card.Title>
+          <Card.Text>{props.profile.party}</Card.Text>
           {/* <Row className="d-flex justify-content-center">
           <Col className="col-auto d-flex align-items-center">
             <Button size="md" variant="secondary" >
