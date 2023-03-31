@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import ReactDatamaps from "react-india-states-map";
 import axios from "axios";
-
+import "./MapStyle.css";
 const STATES = {
   Maharashtra: {
     value: 50,
@@ -26,13 +26,15 @@ const Map = () => {
   //   console.log("hello");
   // });
   axios({
-    method: 'get',
-    url: 'http://192.168.192.202:8000/get_candidates'
-  }).then((response) => {
-    console.log(response.data);
-  }).catch((err) => {
-    console.log(err)
+    method: "get",
+    url: "http://192.168.192.202:8000/get_candidates",
   })
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   const [stateLists, setStateLists] = useState(STATES);
 
@@ -41,8 +43,9 @@ const Map = () => {
   };
 
   return (
-    <div>
+   
       <ReactDatamaps
+      
         regionData={stateLists}
         mapLayout={{
           hoverTitle: "Count",
@@ -59,7 +62,7 @@ const Map = () => {
         onClick={stateOnClick}
         activeState={activeState}
       />
-    </div>
+
   );
 };
 

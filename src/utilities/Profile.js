@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Form, Container, Row, Col } from "react-bootstrap";
+import { Form, Container, Row, Col, Button } from "react-bootstrap";
 import ProfileCard from "./ProfileCards";
 import axios from "axios";
 
 function Profile() {
+  const [constituency, setConstituency] = useState("All");
+  const [state, setState] = useState("All");
+  const [election, setElection] = useState("All");
+  const [opensearch, setOpenSearch] = useState();
+
   const [profiledata, setProfileData] = useState([]);
   useEffect(() => {
     axios({
@@ -17,7 +22,7 @@ function Profile() {
       .catch((err) => {
         console.log(err);
       });
-  },[]);
+  }, []);
   return (
     <>
       {/* #071740 */}
@@ -27,6 +32,7 @@ function Profile() {
           <Row className="mt-2">
             <Col className="p-1 ">
               <Form.Select aria-label="Default select example">
+                
                 <option>State</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
@@ -49,16 +55,27 @@ function Profile() {
                 <option value="3">Three</option>
               </Form.Select>
             </Col>
+            <Col className="p-1 ">
+              <Form className="d-flex">
+                <Form.Control
+                  type="search"
+                  placeholder="Search"
+                  className="me-2"
+                  aria-label="Search"
+                />
+                <Button variant="outline-success">Search</Button>
+              </Form>
+            </Col>
           </Row>
         </Container>
       </Container>
       <Container fluid className="mt-4" style={{ minHeight: "90vh" }}>
         <Container>
           <Row>
-            {profiledata.map((profile ,index) => {
+            {profiledata.map((profile, index) => {
               return (
                 <Col>
-                  <ProfileCard profile={profile}/>
+                  <ProfileCard profile={profile} />
                 </Col>
               );
             })}

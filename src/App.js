@@ -13,7 +13,6 @@ function App() {
       <div className="App">
         <Navbar/>
         <Routes>
-          
           <Route path="/Home" element={<Map />} />
           <Route path="/ProfilePage" element={<Profile />} />
         </Routes>
