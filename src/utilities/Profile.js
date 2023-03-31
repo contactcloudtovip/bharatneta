@@ -10,6 +10,9 @@ function Profile() {
   const [opensearch, setOpenSearch] = useState();
 
   const [profiledata, setProfileData] = useState([]);
+  let [filteredprofiledata, setFilteredProfileData] = useState(" ");
+  const [searchField, setSearchField] = useState("");
+
   useEffect(() => {
     axios({
       method: "get",
@@ -23,6 +26,24 @@ function Profile() {
         console.log(err);
       });
   }, []);
+
+  const handleSearchChange = (e) => {
+    setSearchField(e.target.value);
+  };
+   const sortedprofiledata = profiledata.sort((a, b) =>
+    a.name > b.name ? 1 : -1
+  );
+  filteredprofiledata = sortedprofiledata.filter((sortedprofiledata) => {
+    return (
+      sortedprofiledata.name.toLowerCase().includes(searchField.toLowerCase()) ||
+      sortedprofiledata.party.toLowerCase().includes(searchField.toLowerCase())
+    );
+  });
+
+  const CstncyAscList = profiledata.sort((a, b) =>
+    a.constituency > b.constituency ? 1 : -1
+  );
+
   return (
     <>
       {/* #071740 */}
@@ -32,7 +53,6 @@ function Profile() {
           <Row className="mt-2">
             <Col className="p-1 ">
               <Form.Select aria-label="Default select example">
-                
                 <option>State</option>
                 <option value="1">One</option>
                 <option value="2">Two</option>
@@ -41,18 +61,22 @@ function Profile() {
             </Col>
             <Col className="p-1 ">
               <Form.Select aria-label="Default select example">
-                <option>Parliment</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option disabled>Election type </option>
+                <option defaultValue={"All"}>All</option>
+                <option value="Parliment">Parliment</option>
+                <option value="Assembly">Assembly</option>
               </Form.Select>
             </Col>
             <Col className="p-1 ">
               <Form.Select aria-label="Default select example">
-                <option>Constituency</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option disabled>Constituency</option>
+                {CstncyAscList.map((Cnstncy, index) => {
+                  return (
+                    <option value={Cnstncy.constituency}>
+                      {Cnstncy.constituency}
+                    </option>
+                  );
+                })}
               </Form.Select>
             </Col>
             <Col className="p-1 ">
@@ -62,8 +86,8 @@ function Profile() {
                   placeholder="Search"
                   className="me-2"
                   aria-label="Search"
+                  onChange={handleSearchChange}
                 />
-                <Button variant="outline-success">Search</Button>
               </Form>
             </Col>
           </Row>
@@ -72,10 +96,10 @@ function Profile() {
       <Container fluid className="mt-4" style={{ minHeight: "90vh" }}>
         <Container>
           <Row>
-            {profiledata.map((profile, index) => {
+            {filteredprofiledata.map((profile, index) => {
               return (
-                <Col>
-                  <ProfileCard profile={profile} />
+                <Col className="col-md-3">
+                  <ProfileCard key={index} profile={profile} />
                 </Col>
               );
             })}
